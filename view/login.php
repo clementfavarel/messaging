@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php include_once 'includes/head.php'; ?>
 
 <body>
-
+   <div class="container">
+      <form method="post" class="form" id="form">
+         <h1 class="center">Connexion</h1>
+         <label class="form__label" for="email">Email</label>
+         <input class="form__input" type="email" name="email" id="email" placeholder="mail@exemple.com">
+         <label class="form__label" for="password">Mot de passe</label>
+         <div class="password">
+            <input class="form__input" type="password" name="password" id="password" placeholder="********">
+            <i class="fa-solid fa-eye"></i>
+            <i class="fa-solid fa-eye-slash" style="display:none"></i>
+         </div>
+         <input class="form__submit" type="submit" name="submit" id="submit" value="Se connecter">
+      </form>
+   </div>
+   <script src="controller/controller.js"></script>
 </body>
 
 </html>
