@@ -7,7 +7,7 @@ class Db
 
    // Database credentials
    const DB_HOST = 'localhost';
-   const DB_NAME = 'digihub';
+   const DB_NAME = 'messaging';
    const DB_USERNAME = 'root';
    const DB_PASSWORD = '';
 
