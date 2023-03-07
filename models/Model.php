@@ -1,4 +1,5 @@
 <?php
+include_once './models/Db.php';
 include_once './models/User.php';
 
 class Model
