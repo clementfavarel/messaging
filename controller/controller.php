@@ -23,6 +23,14 @@ class Controller
             $currentPage = 'Accueil';
             include 'view/home.php';
             break;
+         case 'login':
+            $currentPage = 'Connexion';
+            include 'view/login.php';
+            break;
+         case 'register':
+            $currentPage = 'Inscription';
+            include 'view/register.php';
+            break;
          default:
             include 'view/home.php';
             break;
