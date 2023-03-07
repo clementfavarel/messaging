@@ -1,0 +1,58 @@
+<?php
+
+include '../model/Db.php';
+include '../model/User.php';
+
+$body = file_get_contents('php://input');
+
+$register = json_decode($body);
+
+$username = $register->username;
+$email = $register->email;
+$password = $register->password;
+$confirm_password = $register->confirm_password;
+
+if (!empty($username) && !empty($email) && !empty($password) && !empty($confirm_password)) {
+   if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)) {
+         if ($password === $confirm_password) {
+            // check if the email is not already in the database
+            $result = Db::quickFetch('users', 'userMail', $email);
+            if (empty($result)) {
+               // hash the password
+               $password = password_hash($password, PASSWORD_DEFAULT);
+               // insert the user in the database
+               User::create($username, $email, $password);
+               // start the session and store the username in it
+               session_start();
+               $_SESSION['user'] = $username;
+               $body = array(
+                  "success" => "Votre compte a bien été créé"
+               );
+            } else {
+               $body = array(
+                  "error" => "Cette adresse mail est déjà utilisée"
+               );
+            }
+         } else {
+            $body = array(
+               "error" => "Les mots de passe ne correspondent pas"
+            );
+         }
+      } else {
+         $body = array(
+            "error" => "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial"
+         );
+      }
+   } else {
+      $body = array(
+         "error" => "Veuillez entrer une adresse mail valide"
+      );
+   }
+} else {
+   $body = array(
+      "error" => "Veuillez remplir tous les champs"
+   );
+}
+
+echo json_encode($body);

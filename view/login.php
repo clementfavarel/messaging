@@ -4,7 +4,7 @@
 
 <body>
    <div class="container">
-      <form method="post" class="form" id="form">
+      <form method="post" class="form" id="login-form">
          <h1 class="center">Connexion</h1>
          <label class="form__label" for="email">Email</label>
          <input class="form__input" type="email" name="email" id="email" placeholder="mail@exemple.com" onkeyup="checkEmail();">
