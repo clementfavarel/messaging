@@ -21,10 +21,10 @@ class Controller
       switch ($page) {
          case 'home':
             $currentPage = 'Accueil';
-            include 'views/home.php';
+            include 'view/home.php';
             break;
          default:
-            include 'views/home.php';
+            include 'view/home.php';
             break;
       }
    }
