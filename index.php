@@ -1,5 +1,5 @@
 <?php
-require_once 'controller/controller.php';
+require_once 'controller/Controller.php';
 
 $controller = new Controller();
 $controller->invoke();
