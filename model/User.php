@@ -4,25 +4,24 @@ class User
    public $userId;
    public $username;
    public $userMail;
-   public $userPwd;
+   public $userPassword;
 
-   public function __construct($userId, $username, $userMail, $userPwd)
+   public function __construct($userId, $username, $userMail, $userPassword)
    {
       $this->userId = $userId;
       $this->username = $username;
       $this->userMail = $userMail;
-      $this->userPwd = $userPwd;
+      $this->userPassword = $userPassword;
    }
 
-   public function create($userId, $username, $userMail, $userPwd)
+   public static function create($username, $userMail, $userPassword)
    {
       $db = Db::getInstance();
-      $request = $db->prepare("INSERT INTO users (userId, username, userMail, userPwd) VALUES (:userId, :username, :userMail, :userPwd)");
+      $request = $db->prepare("INSERT INTO users (username, userMail, userPassword) VALUES (:username, :userMail, :userPassword)");
       $request->execute(array(
-         'userId' => $userId,
          'username' => $username,
          'userMail' => $userMail,
-         'userPwd' => $userPwd
+         'userPassword' => $userPassword
       ));
    }
 }

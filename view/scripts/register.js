@@ -74,46 +74,46 @@ function checkConfirmPassword() {
 const form = document.getElementById('register_form');
 form.addEventListener('submit', async (e) => {
    e.preventDefault();
-   const username = document.getElementById('username');
-   const email = document.getElementById('email');
-   const password = document.getElementById('password');
-   const confirmPassword = document.getElementById('password_confirm');
+   const username = document.getElementById('username').value;
+   const email = document.getElementById('email').value;
+   const password = document.getElementById('password').value;
+   const confirmPassword = document.getElementById('password_confirm').value;
 
    // check if all fields aren't empty
-   if (username.value !== '' && email.value !== '' && password.value !== '' && confirmPassword.value !== '') {
+   if (username !== '' && email !== '' && password !== '' && confirmPassword !== '') {
       // check if username is valid
-      if (username.value.match(/^[a-zA-Z0-9_]{3,20}$/)) {
+      if (username.match(/^[a-zA-Z0-9_]{3,20}$/)) {
          // check if email is valid
-         if (email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+         if (email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
             // check if password is valid
-            if (password.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+            if (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
                // check if password and confirm password match
-               if (password.value === confirmPassword.value) {
+               if (password === confirmPassword) {
                   // if all fields are valid, create an object with the data
-                  const user = {
-                     username: username.value,
-                     email: email.value,
-                     password: password.value,
-                     password_confirm: confirmPassword.value,
+                  const formdata = {
+                     username,
+                     email,
+                     password,
+                     confirmPassword,
                   };
 
-                  // fetch data to the php controller
-                  const response = await fetch('controller/register.contr.php', {
-                     method: 'POST',
+                  const response = await fetch("controller/register.contr.php", {
+                     method: "POST",
                      headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                      },
-                     body: JSON.stringify(user),
+                     body: JSON.stringify(formdata),
                   });
                   const data = await response.json();
                   console.log(data);
 
                   if (data.success) {
-                     window.location.href = './?';
+                     alert(data.success);
+                     window.location.href = "./?";
                   } else if (data.error) {
-                     alert(data.error)
+                     alert(data.error);
                   } else {
-                     alert('Une erreur est survenue');
+                     alert("Erreur lors de la connexion");
                   }
 
                } else {

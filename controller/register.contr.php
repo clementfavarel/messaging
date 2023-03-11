@@ -1,5 +1,6 @@
 <?php
 include '../model/Db.php';
+include '../model/User.php';
 
 $body = file_get_contents('php://input');
 $body = json_decode($body, true);
@@ -7,7 +8,7 @@ $body = json_decode($body, true);
 $username = $body['username'];
 $email = $body['email'];
 $password = $body['password'];
-$password_confirm = $body['password_confirm'];
+$password_confirm = $body['confirmPassword'];
 
 // check if data aren't empty
 if (!empty($username) && !empty($email) && !empty($password) && !empty($password_confirm)) {
@@ -23,36 +24,27 @@ if (!empty($username) && !empty($email) && !empty($password) && !empty($password
                // hash the password
                $password = password_hash($password, PASSWORD_DEFAULT);
                // insert the user in the database
-               User::create($firstname, $lastname, $birthdate, $email, $password);
+               User::create($username, $email, $password);
                // start the session and store the userFirstname in it
                session_start();
-               $_SESSION['user'] = $firstname;
+               // store userId in the session
+               $_SESSION['userId'] = $result['userId'];
                // return a success message
-               $body = array(
-                  'success' => 'Votre compte a bien été créé.'
-               );
+               $body = array('success' => 'inscription réussie.');
             } else {
-               $body = array(
-                  'error' => 'Ce nom d\'utilisateur est déjà pris.'
-               );
+               $body = array('error' => 'le nom d\'utilisateur est déjà pris.');
             }
          } else {
-            $body = array(
-               'error' => 'Les mots de passe ne correspondent pas.'
-            );
+            $body = array('error' => 'les mots de passe ne correspondent pas.');
          }
       } else {
-         $body = array(
-            'error' => 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.'
-         );
+         $body = array('error' => 'le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.');
       }
    } else {
-      $body = array(
-         'error' => 'L\'email n\'est pas valide.'
-      );
+      $body = array('error' => 'l\'adresse email n\'est pas valide.');
    }
 } else {
-   $body = array(
-      'error' => 'Veuillez remplir tous les champs.'
-   );
+   $body = array('error' => 'veuillez remplir tous les champs.');
 }
+
+echo json_encode($body);
