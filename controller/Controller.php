@@ -22,6 +22,14 @@ class Controller
             $currentPage = 'Accueil';
             include 'view/home.php';
             break;
+         case 'login':
+            $currentPage = 'Connexion';
+            include 'view/login.php';
+            break;
+         case 'register':
+            $currentPage = 'Inscription';
+            include 'view/register.php';
+            break;
          default:
             $currentPage = 'Erreur 404';
             include 'view/404.php';
