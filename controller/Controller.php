@@ -23,6 +23,7 @@ class Controller
             include 'view/home.php';
             break;
          default:
+            $currentPage = 'Erreur 404';
             include 'view/404.php';
             break;
       }
