@@ -9,7 +9,7 @@ include 'view/include/head.php';
 ?>
 
 <body>
-   login
+   <a href="?register">Pas encore de compte ? Inscrivez-vous !</a>
 </body>
 
 </html>
