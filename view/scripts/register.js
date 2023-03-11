@@ -94,6 +94,7 @@ form.addEventListener('submit', async (e) => {
                      username: username.value,
                      email: email.value,
                      password: password.value,
+                     password_confirm: confirmPassword.value,
                   };
 
                   // fetch data to the php controller
@@ -114,6 +115,7 @@ form.addEventListener('submit', async (e) => {
                   } else {
                      alert('Une erreur est survenue');
                   }
+
                } else {
                   alert('Les mots de passe ne correspondent pas');
                }
