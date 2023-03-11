@@ -49,3 +49,7 @@ input:focus {
 	background-color: #f3f3f3;
 	color: #030303;
 }
+.error-msg {
+	color: red;
+	font-size: 0.8rem;
+}
