@@ -3,7 +3,7 @@
 <?php include 'view/include/head.php'; ?>
 
 <head>
-   <link rel="stylesheet" href="styles/404.css">
+   <link rel="stylesheet" href="view/styles/404.css">
 </head>
 
 <body>
