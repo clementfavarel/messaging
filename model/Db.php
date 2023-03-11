@@ -34,4 +34,18 @@ class Db
    {
       return $this->connection;
    }
+
+   public function prepare($request)
+   {
+      return $this->connection->prepare($request);
+   }
+
+   public static function quickFetch($table, $column, $value)
+   {
+      $connection = Db::getInstance()->getConnection();
+      $request = $connection->prepare("SELECT * FROM $table WHERE $column = '$value'");
+      $request->execute();
+      $result = $request->fetch(PDO::FETCH_ASSOC);
+      return $result;
+   }
 }
